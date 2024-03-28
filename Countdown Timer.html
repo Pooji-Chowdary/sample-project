@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- saved from url=(0062)file:///C:/Users/pooji/OneDrive/Desktop/timer%20countdown.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url("https://c4.wallpaperflare.com/wallpaper/246/739/689/digital-digital-art-artwork-illustration-abstract-hd-wallpaper-preview.jpg"); 
+            background-repeat:no-repeat;
+            background-size:1500px 750px;
+        }
+        #timer {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color:white;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            color:green;
+        }
+    </style>
+</head>
+<body>
+     <br><br><b<br><br><br><br><br><br><br><br><br><br>
+    <div id="timer">00:01:00</div><br>
+    <label for="timeInput">Enter time in seconds:</label><br>
+    <input type="number" id="timeInput" value="60"><br><br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+
+    
+
+    <script>
+        let timerInterval;
+        let secondsLeft = 60; // Default starting time
+        let timerRunning = false;
+
+        function startTimer() {
+            if (!timerRunning) {
+                secondsLeft = parseInt(document.getElementById("timeInput").value);
+                updateTimerDisplay();
+                timerInterval = setInterval(decrementTimer, 1000);
+                timerRunning = true;
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerRunning = false;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            secondsLeft = parseInt(document.getElementById("timeInput").value); // Reset to user input value
+            updateTimerDisplay();
+            timerRunning = false;
+        }
+
+        function decrementTimer() {
+            if (secondsLeft > 0) {
+                secondsLeft--;
+                updateTimerDisplay();
+            } else {
+                stopTimer();
+            }
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(secondsLeft / 3600);
+            const minutes = Math.floor((secondsLeft % 3600) / 60);
+            const seconds = secondsLeft % 60;
+
+            const formattedTime = padNumber(hours) + ":" + padNumber(minutes) + ":" + padNumber(seconds);
+            document.getElementById("timer").textContent = formattedTime;
+        }
+
+        function padNumber(number) {
+            return (number < 10 ? '0' : '') + number;
+        }
+    </script>
+
+
+
+</b<br></body></html>
